@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>niyatiiiii</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Comic Sans MS', cursive;
+    overflow:hidden;
+    text-align:center;
+}
+
+.box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    z-index:10;
+}
+
+h1{ color:#ff4d6d; }
+
+button{
+    padding:12px 26px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+}
+
+#yes,#yes2{
+    background:#ff4d6d;
+    color:white;
+}
+
+#no,#no2{
+    background:#444;
+    color:white;
+    position:absolute;
+}
+
+/* hearts */
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:20px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Optional romantic song: add a file named song.mp3 in the repo and uncomment the block to autoplay -->
+<!-- <audio autoplay loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio> -->
+
+<div class="box" id="screen1">
+    <h1>Niyati 😝</h1>
+    <p>Can I tell you something?</p>
+    <button id="yes">Okay 💕</button>
+    <button id="no">No 🙄</button>
+</div>
+
+<div class="box" id="screen2" style="display:none;">
+    <h1>Are you sure? 😝</h1>
+    <button id="yes2">Yes 💖</button>
+    <button id="no2">No 😶</button>
+</div>
+
+<div class="box" id="final" style="display:none;">
+    <h1>💖</h1>
+    <p id="finalMsg"></p>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const noBtn2 = document.getElementById("no2");
+const screen1 = document.getElementById("screen1");
+const screen2 = document.getElementById("screen2");
+const final = document.getElementById("final");
+const finalMsg = document.getElementById("finalMsg");
+
+function move(btn){
+    // Keep button inside the viewport
+    const x = Math.random()*(window.innerWidth - btn.offsetWidth - 20) + 10;
+    const y = Math.random()*(window.innerHeight - btn.offsetHeight - 20) + 10;
+    btn.style.left = x + "px";
+    btn.style.top  = y + "px";
+}
+
+noBtn.onmouseover = ()=>move(noBtn);
+noBtn2.onmouseover = ()=>move(noBtn2);
+
+document.getElementById("yes").onclick=()=>{
+    screen1.style.display="none";
+    screen2.style.display="block";
+};
+
+document.getElementById("no2").onclick=()=>{
+    alert("Error 😝 Try again <3");
+};
+
+document.getElementById("yes2").onclick=()=>{
+    screen2.style.display="none";
+    final.style.display="block";
+    finalMsg.innerHTML = `
+    It’s not Valentine’s Day yet,<br>
+    and I know you might say no…<br>
+    but I still wanted to say this.<br><br>
+
+    We studied till 10th together,<br>
+    and 10th was honestly special because of you.<br><br>
+
+    We’re in different schools now, different paths,<br>
+    but you’re still one of my favorite memories 💖
+    `;
+};
+
+// hearts rain
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*window.innerWidth+"px";
+    h.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
