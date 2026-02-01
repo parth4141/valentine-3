@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine?</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+    overflow: hidden;
+  }
+
+  /* HEART RAIN */
+  .heart {
+    position: fixed;
+    top: -20px;
+    font-size: 20px;
+    color: #ff4d6d;
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+
+  .container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .emoji {
+    font-size: 4rem;
+    animation: bounce 1.8s infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-size: 3.3rem;
+    color: #d63384;
+    margin: 15px 0 35px;
+  }
+
+  .buttons {
+    position: relative;
+    height: 120px;
+    width: 320px;
+    margin: auto;
+  }
+
+  button {
+    padding: 14px 34px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.25s ease;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  #noBtn {
+    background: #888;
+    color: white;
+    left: 30px;
+    top: 60px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="emoji">😝💗</div>
+  <h1>Niyati, will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="yesClicked()">YES 💕</button>
+    <button id="noBtn">NO 😐</button>
+  </div>
+</div>
+
+<script>
+  /* NO BUTTON LOGIC */
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  let moves = 0;
+  const maxMoves = 3;
+
+  noBtn.addEventListener("mouseenter", () => {
+    if (moves < maxMoves) {
+      moves++;
+      const x = Math.random() * 120 + 20;
+      const y = Math.random() * 40 + 50;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    } else {
+      const yesRect = yesBtn.getBoundingClientRect();
+      const containerRect = document
+        .querySelector(".buttons")
+        .getBoundingClientRect();
+
+      noBtn.style.left = (yesRect.left - containerRect.left - 90) + "px";
+      noBtn.style.top = (yesRect.top - containerRect.top) + "px";
+    }
+  });
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+        font-family:'Comic Sans MS',cursive;
+        color:#d63384;
+        text-align:center;
+      ">
+        <h1 style="font-size:4rem;">YAYYY 😝💖</h1>
+        <p style="font-size:2rem;">No had no chance 😌</p>
+        <p style="font-size:3rem;">💗💘💗</p>
+      </div>
+    `;
+  }
+
+  /* HEART RAIN CREATOR */
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💗";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
