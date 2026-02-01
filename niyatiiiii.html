@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>niyatiiiii</title>
+<title>For Niyati 😝</title>
 
 <style>
 body{
@@ -19,29 +19,29 @@ body{
 
 .box{
     background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    padding:32px;
+    border-radius:22px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
     z-index:10;
 }
 
 h1{ color:#ff4d6d; }
 
 button{
-    padding:12px 26px;
+    padding:12px 28px;
     font-size:18px;
     border:none;
     border-radius:30px;
     cursor:pointer;
-    margin:10px;
+    margin:12px;
 }
 
-#yes,#yes2{
+.yes{
     background:#ff4d6d;
     color:white;
 }
 
-#no,#no2{
+.no{
     background:#444;
     color:white;
     position:absolute;
@@ -63,72 +63,69 @@ button{
 
 <body>
 
-<!-- Optional romantic song: add a file named song.mp3 in the repo and uncomment the block to autoplay -->
-<!-- <audio autoplay loop>
+<!-- Optional song -->
+<!--
+<audio autoplay loop>
 <source src="song.mp3" type="audio/mpeg">
-</audio> -->
+</audio>
+-->
 
-<div class="box" id="screen1">
+<!-- SCREEN 1 -->
+<div class="box" id="s1">
     <h1>Niyati 😝</h1>
-    <p>Can I tell you something?</p>
-    <button id="yes">Okay 💕</button>
-    <button id="no">No 🙄</button>
+    <p>Will you be my Valentine? 💖</p>
+    <button class="yes" onclick="goNext()">Yes 💕</button>
+    <button class="no" id="no1">No 🙄</button>
 </div>
 
-<div class="box" id="screen2" style="display:none;">
-    <h1>Are you sure? 😝</h1>
-    <button id="yes2">Yes 💖</button>
-    <button id="no2">No 😶</button>
+<!-- SCREEN 2 -->
+<div class="box" id="s2" style="display:none;">
+    <h1>Are you really sure? 😝</h1>
+    <button class="yes" onclick="finalPage()">Yes 💘</button>
+    <button class="no" id="no2">No 😶</button>
 </div>
 
-<div class="box" id="final" style="display:none;">
+<!-- FINAL SCREEN -->
+<div class="box" id="s3" style="display:none;">
     <h1>💖</h1>
-    <p id="finalMsg"></p>
+    <p>
+        It’s not Valentine’s Day yet,<br>
+        and I know you might say no…<br>
+        but I still wanted to say this.<br><br>
+
+        We studied till 10th together,<br>
+        and 10th was honestly special because of you.<br><br>
+
+        We’re in different schools now, different paths,<br>
+        but you’re still one of my favorite memories 💖
+    </p>
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
-const noBtn2 = document.getElementById("no2");
-const screen1 = document.getElementById("screen1");
-const screen2 = document.getElementById("screen2");
-const final = document.getElementById("final");
-const finalMsg = document.getElementById("finalMsg");
+const no1 = document.getElementById("no1");
+const no2 = document.getElementById("no2");
 
 function move(btn){
-    // Keep button inside the viewport
-    const x = Math.random()*(window.innerWidth - btn.offsetWidth - 20) + 10;
-    const y = Math.random()*(window.innerHeight - btn.offsetHeight - 20) + 10;
-    btn.style.left = x + "px";
-    btn.style.top  = y + "px";
+    btn.style.left = Math.random()*(window.innerWidth-btn.offsetWidth)+"px";
+    btn.style.top  = Math.random()*(window.innerHeight-btn.offsetHeight)+"px";
 }
 
-noBtn.onmouseover = ()=>move(noBtn);
-noBtn2.onmouseover = ()=>move(noBtn2);
+no1.onmouseover = ()=>move(no1);
+no2.onmouseover = ()=>move(no2);
 
-document.getElementById("yes").onclick=()=>{
-    screen1.style.display="none";
-    screen2.style.display="block";
-};
+function goNext(){
+    s1.style.display="none";
+    s2.style.display="block";
+}
 
-document.getElementById("no2").onclick=()=>{
-    alert("Error 😝 Try again <3");
-};
+no2.onclick = ()=>{
+    alert("Error love! 😝 Try again <3");
+}
 
-document.getElementById("yes2").onclick=()=>{
-    screen2.style.display="none";
-    final.style.display="block";
-    finalMsg.innerHTML = `
-    It’s not Valentine’s Day yet,<br>
-    and I know you might say no…<br>
-    but I still wanted to say this.<br><br>
-
-    We studied till 10th together,<br>
-    and 10th was honestly special because of you.<br><br>
-
-    We’re in different schools now, different paths,<br>
-    but you’re still one of my favorite memories 💖
-    `;
-};
+function finalPage(){
+    s2.style.display="none";
+    s3.style.display="block";
+}
 
 // hearts rain
 setInterval(()=>{
