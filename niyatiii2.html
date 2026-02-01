@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .container {
+    text-align: center;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: #c2185b;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #7a2e4a;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+
+  .buttons {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    margin: auto;
+  }
+
+  button {
+    padding: 14px 34px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.3s ease;
+  }
+
+  #yesBtn {
+    background: #e91e63;
+    color: white;
+    left: 50%;
+    top: 90px;
+    transform: translateX(-50%);
+  }
+
+  #noBtn {
+    background: #9e9e9e;
+    color: white;
+    left: 40px;
+    top: 90px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Niyati</h1>
+  <p>Will you be my Valentine?</p>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="goYes()">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  let hoverCount = 0;
+
+  // Fixed positions (always inside screen)
+  const positions = [
+    { left: "120px", top: "10px" },    // up
+    { left: "210px", top: "90px" },    // right middle
+    { left: "20px",  top: "150px" },   // left bottom
+    { left: "120px", top: "130px" }    // near yes
+  ];
+
+  noBtn.addEventListener("mouseenter", () => {
+    if (hoverCount < positions.length) {
+      noBtn.style.left = positions[hoverCount].left;
+      noBtn.style.top = positions[hoverCount].top;
+      hoverCount++;
+    } else {
+      goYes();
+    }
+  });
+
+  function goYes() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background:linear-gradient(135deg,#ffb6c1,#ffd1dc);
+        font-family:Arial,sans-serif;
+        text-align:center;
+      ">
+        <h1 style="font-size:3.5rem;color:#c2185b;">
+          I was hoping for this
+        </h1>
+        <p style="font-size:1.4rem;color:#7a2e4a;">
+          Happy Valentine’s 💗
+        </p>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
